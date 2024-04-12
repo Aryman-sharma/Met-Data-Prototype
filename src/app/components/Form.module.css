@@ -1,0 +1,57 @@
+/* src/components/Form.module.css */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+}
+
+.formContainer {
+  max-width: 500px;
+  width: 500px;
+  padding: 20px;
+  border-radius: 12px;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #333; /* Dark gray text color */
+}
+
+.selectField,
+.inputField {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9; /* Light gray background */
+  color: #333; /* Dark gray text color */
+}
+
+.inputField {
+  width: 100%;
+}
+
+.submitButton {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #4facfe;
+  color: #fff; /* White text color */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #00f2fe;
+}
