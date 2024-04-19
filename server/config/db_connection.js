@@ -1,15 +1,31 @@
-import { createPool } from 'mysql2/promise';
-import { host as _host, user as _user, password as _password, database as _database } from './db_config.js';
+// db_connection.js
 
-// Create connection pool
-const pool = createPool({
-  host: _host,
-  user: _user,
-  password: _password,
-  database: _database,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
-});
+import { user, host, database, password, port } from "./db_config.js";
+import pkg from "pg";
+const { Client } = pkg;
 
-export default pool;
+const redshiftConfig = {
+  user: user,
+  host: host,
+  database: database,
+  password: password,
+  port: port,
+};
+
+// Export the connectToRedshift function directly
+export async function connectToRedshift() {
+  const client = new Client(redshiftConfig);
+
+  try {
+    // Connect to the Redshift cluster
+    await client.connect();
+    console.log("Connected to Redshift cluster");
+    // Return the client object for further use
+    return client;
+  } catch (err) {
+    // If connection fails, log the error
+    console.error("Error connecting to Redshift cluster:", err);
+    // Return null or throw the error depending on your error handling strategy
+    throw err;
+  }
+}

@@ -23,7 +23,7 @@ const Form = ({ onDataReceived }) => {
   const fetchStates = async () => {
     try {
       // Mock API call to fetch states data
-      const statesData = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'];
+      const statesData = ['Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana', 'HIMACHAL PRADESH', 'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'];
       setStates(statesData);
     } catch (error) {
       console.error('Error fetching states:', error);
@@ -35,8 +35,8 @@ const Form = ({ onDataReceived }) => {
       // Mock API call to fetch districts based on the selected state
       // Replace this with your actual API call
       let districtsData = [];
-      if (selectedState === 'Himachal Pradesh') {
-        districtsData = ['Lahul & Spiti', 'Kullu'];
+      if (selectedState === 'HIMACHAL PRADESH') {
+        districtsData = ['LAHUL & SPITI', 'KULLU'];
       } else if (selectedState === 'Uttar Pradesh') {
         districtsData = ['Shahjahanpur'];
       }
