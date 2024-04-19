@@ -33,11 +33,12 @@
 //   })
 //   .catch(err => console.error('Error connecting to Redshift cluster:', err));
 
-import { user, host, database, password, port } from "./db_config.js";
+// import { user, host, database, password, port } from "./db_config.js";
 
+const cors = require("cors");
 const express = require("express");
 const { Client } = require("pg");
-const cors = require("cors");
+
 const app = express();
 app.use(express.json());
 
@@ -52,11 +53,11 @@ app.use(cors(corsOptions));
 
 // Configuration for your Redshift cluster
 const redshiftConfig = {
-  user: user,
-  host: host,
-  database: database,
-  password: password,
-  port: port,
+  user: 'awsuser',
+  host:'redshift-cluster-2.c3jaxtqg6bc5.us-east-1.redshift.amazonaws.com',
+  database:'dev',
+  password: 'Aryman.12345',
+  port:'5439',
 };
 
 // Create a new client instance
@@ -93,7 +94,7 @@ app.post("/api/weather/generateData", async (req, res) => {
     
     const queryText = `
     SELECT *
-    FROM "public".$5
+    FROM "public".${parameter}
     WHERE "state"= $1 AND "distict"= $2 AND "year_val">= $3 AND "year_val"<= $4
   `;
     const { rows } = await client.query(queryText, [

@@ -1,23 +1,41 @@
-import pool from '../config/db.connection.js';
 
-const generateData = async (req, res) => {
+exports.generateData =  async (req, res) => {
   try {
-    const { state, district, fromYear, toYear, parameter } = req.body;
-    const query = `
-      SELECT *
-      FROM weather_data
-      WHERE State = ? AND District = ? AND year_val >= ? AND year_val <= ? AND parameter = ?
-    `;
+    let { state, district, fromYear, toYear, parameter } = req.body;
+
+    // Check if required parameters are present
+    if (!state || !district || !fromYear || !toYear || !parameter) {
+      return res.status(400).json({ error: "Missing required parameters" });
+    }
+
+    console.log(state);
+    console.log(district);
+    console.log(fromYear);
+    console.log(toYear);
+    console.log(parameter);
+
+    // Convert state and district to uppercase for comparison
+    state = state.toUpperCase();
+    district = district.toUpperCase();
+
     
-    // Execute the query to retrieve data from the database
-    const [rows] = await pool.query(query, [state, district, fromYear, toYear, parameter]);
-    
-    // Send the retrieved data back to the frontend
+    const queryText = `
+    SELECT *
+    FROM "public".$5
+    WHERE "state"= $1 AND "distict"= $2 AND "year_val">= $3 AND "year_val"<= $4
+  `;
+    const { rows } = await client.query(queryText, [
+      state,
+      district,
+      fromYear,
+      toYear,
+    ]);
+
+    // Send the query result back to the frontend
     res.json({ data: rows });
   } catch (error) {
-    console.error('Error generating data:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error("Error generating data:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
-};
+}
 
-export default generateData;
